@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer - Utilitaires.ca</title>
+
+    <script>
+        // Apply theme immediately before page renders
+        (function() {
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.documentElement.classList.add('dark-theme');
+            }
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="timer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="control-buttons">
+        <button id="backButton" title="Go back"><i class="fas fa-arrow-left"></i></button>
+        <button id="themeButton" title="Toggle theme"><i class="fas fa-moon"></i></button>
+        <!-- Zoom buttons will be added by JavaScript -->
+    </div>
+    <main>
+        <div class="timer-container">
+            <div id="timerContainer">
+                <!-- Timer Selection View -->
+                <div id="timerSelectionView">
+                    <h2>Select Timer</h2>
+                    <div class="timer-presets">
+                        <button class="preset-btn" data-minutes="5">
+                            <span class="preset-time">5</span>
+                            <span class="preset-label">minutes</span>
+                        </button>
+                        <button class="preset-btn" data-minutes="15">
+                            <span class="preset-time">15</span>
+                            <span class="preset-label">minutes</span>
+                        </button>
+                        <button class="preset-btn" data-minutes="60">
+                            <span class="preset-time">1</span>
+                            <span class="preset-label">hour</span>
+                        </button>
+                        <button class="preset-btn custom-btn">
+                            <span class="preset-time"><i class="fas fa-sliders-h"></i></span>
+                            <span class="preset-label">custom</span>
+                        </button>
+                    </div>
+                    
+                    <div class="timer-options">
+                        <div class="option-item">
+                            <label for="flashToggle">Flash on finish</label>
+                            <label class="switch">
+                                <input type="checkbox" id="flashToggle" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="option-item">
+                            <label for="progressToggle">Show progress bar</label>
+                            <label class="switch">
+                                <input type="checkbox" id="progressToggle" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Custom Timer View -->
+                <div id="customTimerView" class="hidden">
+                    <h2>Custom Timer</h2>
+                    <div class="custom-inputs">
+                        <div class="time-input">
+                            <input type="number" id="hoursInput" min="0" max="23" value="0">
+                            <label>hours</label>
+                        </div>
+                        <div class="time-input">
+                            <input type="number" id="minutesInput" min="0" max="59" value="0">
+                            <label>minutes</label>
+                        </div>
+                        <div class="time-input">
+                            <input type="number" id="secondsInput" min="0" max="59" value="0">
+                            <label>seconds</label>
+                        </div>
+                    </div>
+                    <div class="custom-controls">
+                        <button id="startCustomBtn" class="btn">Start</button>
+                        <button id="cancelCustomBtn" class="btn">Cancel</button>
+                    </div>
+                </div>
+                
+                <!-- Countdown View -->
+                <div id="countdownView" class="hidden">
+                    <div class="countdown-display">
+                        <span id="displayHours">00</span>:<span id="displayMinutes">00</span>:<span id="displaySeconds">00</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progressFill"></div>
+                    </div>
+                    <div class="countdown-controls">
+                        <button id="pauseBtn" class="btn">Pause</button>
+                        <button id="resumeBtn" class="btn hidden">Resume</button>
+                        <button id="cancelBtn" class="btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <script src="timer.js"></script>
+</body>
+</html>

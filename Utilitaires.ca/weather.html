@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast | Utilitaires.ca</title>
+
+    <script>
+        // Apply theme immediately before page renders
+        (function() {
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.documentElement.classList.add('dark-theme');
+            }
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="control-buttons">
+        <button id="backButton" title="Go back"><i class="fas fa-arrow-left"></i></button>
+        <button id="themeButton" title="Toggle theme"><i class="fas fa-moon"></i></button>
+        <!-- Zoom buttons will be added by JavaScript -->
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="search-container">
+                <input type="text" id="city-input" placeholder="Enter city name">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </header>
+
+        <main>
+            <div class="weather-container">
+                <div class="current-weather">
+                    <div class="weather-info">
+                        <h2 id="city-name">--</h2>
+                        <p id="current-date">--</p>
+                        <div class="temperature">
+                            <span id="temperature">--</span>
+                            <span class="unit">°C</span>
+                        </div>
+                        <p id="description">--</p>
+                        <div class="details">
+                            <div class="detail">
+                                <i class="fas fa-wind"></i>
+                                <span id="wind">-- km/h</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-tint"></i>
+                                <span id="humidity">--%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-icon">
+                        <img id="weather-icon-img" src="" alt="Weather icon">
+                    </div>
+                </div>
+
+                <div class="forecast">
+                    <h3>5-Day Forecast</h3>
+                    <div class="forecast-container" id="forecast-container">
+                        <!-- Forecast items will be added here by JavaScript -->
+                    </div>
+                </div>
+                
+                <div id="error-message" class="error-message"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="weather.js"></script>
+</body>
+</html>

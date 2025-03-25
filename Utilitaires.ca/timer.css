@@ -1,0 +1,373 @@
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #333;
+    --container-bg: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --btn-start: #4CAF50;
+    --btn-pause: #FFC107;
+    --btn-reset: #F44336;
+    --timer-bg: #f8f8f8;
+    --preset-bg: #f0f0f0;
+    --preset-hover: #e0e0e0;
+    --preset-text: #333;
+    --progress-bg: #e0e0e0;
+    --progress-fill: #4CAF50;
+}
+
+.dark-theme {
+    --bg-color: #222;
+    --text-color: #f0f0f0;
+    --container-bg: #333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --btn-start: #3A8A3E;
+    --btn-pause: #DDA500;
+    --btn-reset: #D32F2F;
+    --timer-bg: #444;
+    --preset-bg: #444;
+    --preset-hover: #555;
+    --preset-text: #f0f0f0;
+    --progress-bg: #555;
+    --progress-fill: #3A8A3E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.control-buttons {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+}
+
+.control-buttons button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+}
+
+.control-buttons button:hover {
+    transform: scale(1.1);
+}
+
+.control-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* Timer-specific styles */
+
+/* Timer container */
+.timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#timerContainer {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--container-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    text-align: center;
+    width: 400px;
+    min-height: 400px;
+    transition: background-color 0.3s;
+}
+
+/* Timer Selection View */
+#timerSelectionView h2,
+#customTimerView h2 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.timer-presets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.preset-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--preset-bg);
+    border: none;
+    border-radius: 8px;
+    padding: 20px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--preset-text);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    height: 100px;
+}
+
+.preset-btn:hover {
+    background-color: var(--preset-hover);
+    transform: translateY(-2px);
+}
+
+.preset-btn:active {
+    transform: translateY(0);
+}
+
+.preset-time {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.preset-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Timer Options */
+.timer-options {
+    margin-top: 30px;
+}
+
+.option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--btn-start);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--btn-start);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Custom Timer View */
+.custom-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-input input {
+    width: 70px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    background-color: var(--preset-bg);
+    color: var(--text-color);
+}
+
+.time-input label {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.custom-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Countdown View */
+.countdown-display {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: var(--timer-bg);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: var(--progress-bg);
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+#progressFill {
+    height: 100%;
+    width: 100%;
+    background-color: var(--progress-fill);
+    border-radius: 5px;
+    transition: width 1s linear;
+}
+
+.countdown-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--preset-bg);
+    color: var(--text-color);
+}
+
+.btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+#pauseBtn, #resumeBtn {
+    background-color: var(--btn-pause);
+    color: #333;
+}
+
+#cancelBtn {
+    background-color: var(--btn-reset);
+    color: white;
+}
+
+#startCustomBtn {
+    background-color: var(--btn-start);
+    color: white;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Flash animation */
+@keyframes flash {
+    0%, 50%, 100% {
+        background-color: var(--container-bg);
+    }
+    25%, 75% {
+        background-color: rgba(255, 0, 0, 0.3);
+    }
+}
+
+.flash-animation {
+    animation: flash 1s ease-in-out infinite;
+}
+
+@media (max-width: 480px) {
+    .timer-presets {
+        grid-template-columns: 1fr;
+    }
+    
+    .custom-inputs {
+        flex-direction: column;
+    }
+    
+    .countdown-display {
+        font-size: 2.5rem;
+    }
+}

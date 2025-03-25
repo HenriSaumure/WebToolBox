@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilitaires.ca - Home</title>
+    
+    <!-- Prevent theme flash -->
+    <script>
+        // Apply theme immediately before page renders
+        (function() {
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.documentElement.classList.add('dark-theme');
+            }
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="control-buttons">
+        <button id="themeButton" title="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+    
+    <header>
+        <h1>Utilitaires.ca</h1>
+        <p>Simple Web Tools</p>
+    </header>
+    
+    <main>
+        <!-- Search section -->
+        <div class="search-container">
+            <input type="text" id="search-box" placeholder="Search tools...">
+            <div id="suggestions" class="suggestions-dropdown"></div>
+        </div>
+        
+        <!-- Tool grid -->
+        <div id="toolsGrid" class="tools-grid"></div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Utilitaires.ca</p>
+    </footer>
+    
+    <!-- Important: Load script.js before index.js -->
+    <script src="script.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
